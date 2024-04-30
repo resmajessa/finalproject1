@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>SignIn</title>
+</head>
+<body>
+    <div class="con">
+        <div>
+            <div>
+           <nav>
+            <div class="logo"><img src="nami-modified.png" alt="Nami" class="logoo"></div>
+            <ul>
+                <li><a href="frontpage.html">Home</a></li>
+                <li><a href="About.html">About</a></li>
+                <!--<li><a href="Contact.html">Products</a></li>--> 
+                <li><a href="index.html">SignIn</a></li>
+                <li> <a href="ShopNow.php"><button class="btn"><i class="fa-solid fa-cart-shopping"></i> Shop Now</button></a> </li>
+            </ul>
+        </nav> 
+        </div>
+           </div>
+           <div class="box2">
+            <form action="Signin.php" method="post" onsubmit="validateLoginForm()">
+                <h2>Sign In</h2>
+                <div class="inputbox">
+                    
+                    <i class="fa solid fa-user"></i>
+                    <input type="text" id="username" name="username" placeholder="Username" required>
+                    
+                </div>
+                <div class="inputbox">
+                    <i class="fa solid fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                   
+                   
+                </div>
+                <div class="captcha">
+                    <label></label>
+                    <div class="preview"></div>
+                    <div class="captcha-form">
+                        <input type="text" id="captcha-form" name="captcha-input"  placeholder="Enter Captcha">
+                        <button id="captcha-refresh" class="captcha-refresh"><i class="fa solid fa-refresh"></i></button>
+                    </div>
+
+                </div>
+               <a href="#"><button  id="login">LogIn</button></a>
+                <div class="links">
+                    <a href="forgotpass.php">Forgot Password?</a>
+                    <a href="SignUp.html">SignUp</a>
+                    <a href="Guess.html">Guess</a>
+
+                    
+                </div>
+            </form>
+           </div>
+        </div>
+        <script>
+            const fonts = ['cursive', 'sans-serif', 'serif', 'monospace', 'fantasy'];
+            let captchaValue = "";
+
+            function generateCaptcha() {
+                let value = btoa(Math.random() * 100000000000);
+                value = value.substr(0, 5 + Math.random() * 5);
+                captchaValue = value;
+            }
+
+            function setCaptcha() {
+                let html = captchaValue.split("").map((char) => {
+                    const rotate = -20 + Math.trunc(Math.random() * 30);
+                    const font = Math.trunc(Math.random() * fonts.length);
+                    return `<span style="transform:rotate(${rotate}deg);font-family:${fonts[font]}">${char}</span>`;
+                }).join("");
+                document.querySelector(".captcha .preview").innerHTML = html; // Update the selector to target only the captcha element
+            }
+
+            function initCaptcha() {
+                document.querySelector(".captcha .captcha-refresh").addEventListener("click", function () {
+                    generateCaptcha();
+                    setCaptcha();
+                });
+                generateCaptcha();
+                setCaptcha();
+            }
+
+            function validateCaptcha() {
+                const captchaInput = document.getElementById('captcha-form').value;
+                return captchaInput === captchaValue && captchaInput !== '';
+            }
+
+            document.getElementById('login').addEventListener('click', function () {
+                if (!validateCaptcha()) {
+                    alert('Please enter the correct captcha.');
+
+                }
+
+            });
+
+            initCaptcha();
+
+
+          //  function validateLoginForm() {
+           //     var username = document.getElementById("username").value;
+          //      var password = document.getElementById("password").value;
+           //     var captcha = document.getElementById("captcha-input").value;
+
+           //     if (!username || !password || !captcha) {
+           //         alert("Please enter all fields.");
+          //          return false; // Prevent form submission
+          //      }
+
+          //      return true; // Allow form submission
+          //  }
+
+
+
+
+
+
+
+            /* (function(){
+                 const fonts = ['cursive','san-serif','serif','monospace', 'fantasy'];
+                 let captchaValue = "";
+                 function generateCaptcha(){
+                     let value = btoa(Math.random()*100000000000);
+                     value = value.substr(0,5+Math.random()*5);
+                     captchaValue = value;
+                 }
+                 function setCaptcha(){
+                    let html = captchaValue.split("").map((char)=>{
+                         const rotate = -20 + Math.trunc(Math.random()*30);
+                         const font = Math.trunc(Math.random()*fonts.length);
+                         return `<span style="transform:rotate(${rotate}deg);font-family:${fonts[font]}">${char}</span>`;
+                     }).join("");
+                     document.querySelector(" .captcha .preview").innerHTML = html;
+                 }
+                 function initCaptcha(){
+                     document.querySelector(" .captcha .captcha-refresh").addEventListener("click", function(){
+                         generateCaptcha();
+                         setCaptcha();
+                     });
+                     generateCaptcha();
+                         setCaptcha();
+                 }
+                 initCaptcha();
+
+
+             })();*/
+        </script>
+        <style>
+             .box2{
+        margin-top: 100px;
+    }
+            form{
+    
+        position: absolute;
+        inset: 2px;
+        border-radius: 50px 5px;
+        background-color: #28292d;
+        z-index: 9;
+        padding: 30px 30px;
+        display: flex;
+        flex-direction: column;
+        
+    }
+    h2{
+        color: orange;
+        font-size: 50px;
+        font-weight: 500;
+        text-align: center;
+        margin-top: 5%;
+    
+    }
+    .inputbox{
+        position: relative;
+        margin-top: 10%;
+        width: 100%;
+        height: 50px;
+        border-bottom: 2px solid orangered;
+    }
+    .captcha-form{
+        width: 100%;
+        height: 50px;
+        border-bottom: 2px solid orangered;
+        margin-bottom: -30px;
+
+    }
+    #username,
+    #password,
+    #captcha-form{
+        width: 80%;
+        height: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: white;
+        font-size: 1em;
+        font-weight: 600;
+
+    }
+    #username,
+    #password{
+        padding-left: 10%;
+        width: 100%;
+        
+    }
+    .inputbox i{
+        position: absolute;
+        left: 10px;
+        font-size: 1.2em;
+        color: orange;
+        line-height: 57px;
+    }
+    .box2 .captcha{
+        margin-top: 40px;
+    }
+    .box2 .captcha .preview{
+        border: 2px dotted orange;
+        line-height: 40px;
+        width: 100%;
+        height: 60px;
+        color: white;
+        text-align: center;
+        letter-spacing: 8px;
+        font-family: monospace;
+    }
+    .box2 .captcha .preview span{
+        display: inline-block;
+        user-select: none;
+    }
+    .box2 .captcha .captcha-refresh{
+        position: absolute;
+        top: 51%;
+        background-color: transparent;
+        height: 56px;
+        width: 10%;
+        border: none;
+        outline: none;
+        right: 28px;
+    }
+    .box2 .captcha .captcha-refresh i{
+       font-size: 1.5rem;
+       color: orange;
+       cursor: pointer;
+       transition: tranform 0.2s ease;
+    }
+    .box2 .captcha .captcha-refresh i:active{
+        transform: scale(0.96);
+    }
+  
+    #login{
+        padding: 20px;
+        margin-top: 15%;
+        border-radius: 25px;
+        width: 100%;
+        border: none;
+        outline: none;
+        background: orange;
+        font-weight: 600;
+        transition: tranform 0.2s ease;
+        font-size: 18px;
+    }
+    #login:active{
+        transform: scale(0.96);
+    }
+   
+    #login:hover{
+        background: linear-gradient(90deg, #00ffff, #ffa600);
+    }
+    .links{
+        display: grid;
+        justify-content: center;
+        text-align: center;
+        gap: 15px;
+        
+    }
+    .links a{
+       position: relative;
+       top: 20px;
+        font-size: 1em;
+        color: orange;
+        text-decoration: none;
+    }
+    .links a:hover{
+        color:cyan;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    /* .inputbox label{
+        position: absolute;
+        top: 50%;
+        left: 5px;               
+        font-size: 1em;
+        color: gray;
+        transform: translateY(-50%);
+        font-weight: 500;
+        pointer-events: none;
+        transition: .5s;
+        padding-left: 10%;
+    }
+    .captcha label{
+        position: absolute;
+        top: 50%;
+        left: 5px;               
+        font-size: 1em;
+        color: gray;
+        font-weight: 500;
+        pointer-events: none;
+        transition: .8s;
+
+    }
+    .inputbox #usernane:focus~label, .inputbox #username:valid~label{
+        top: -5px;
+        color: orange;
+       
+    }
+
+    
+   .inputbox{
+        position: relative;
+        margin-top: 10%;
+        width: 100%;
+        height: 50px;
+        border-bottom: 2px solid orangered;
+    }
+    .inputbox label{
+        position: absolute;
+        top: 50%;
+        left: 5px;               
+        font-size: 1em;
+        color: gray;
+        font-weight: 500;
+        pointer-events: none;
+        transition: .5s;
+        
+        
+    }
+    .inputbox input:focus~label, .inputbox input:valid~label{
+        top: -5px;
+        color: orange;
+        transform: translateY(-50%), translateX(-10%); 
+    }
+    .inputbox input{
+        width: 80%;
+        height: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: white;
+        font-size: 1em;
+        font-weight: 600;
+
+    }
+    .inputbox i{
+        position: absolute;
+        right: 8px;
+        font-size: 1.2em;
+        color: orange;
+        line-height: 57px;
+    }
+    span .name{
+        margin-top: 10%;
+    }
+    
+    .captcha .preview{
+        color: white;
+        width: 100%;
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        letter-spacing: 8px;
+        border-bottom: 2px solid orangered;
+        font-family: monospace;
+        user-select: none;
+    }
+    .captcha input{
+        margin-top: 10%;
+        width: 80%;
+        height: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: white;
+        font-size: 1em;
+        font-weight: 600;
+        border-bottom: 2px solid orangered;
+
+    }*/
+            
+        </style>
+        
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+  
